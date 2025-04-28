@@ -1,154 +1,76 @@
-using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI;
-using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
-namespace Projet_PSI_new
+namespace psi_joséphine
 {
     public class BaseUtilisateur
     {
-        public int rows;
-        public int cols;
-        public List<Personne> cuisiniers;
-        public List<Personne> clients;
-        public List<Personne> users;
-        public BaseUtilisateur()
+        private static string connexionString = "SERVER=localhost;PORT=3306;DATABASE=psi_LivinParis;UID=root;PASSWORD=Root";
+
+        public static void CreerUtilisateur(Personne utilisateur)
         {
-            string filePath = "MetroParis.xlsx";
-            if (File.Exists(filePath))
+            using (MySqlConnection con = new MySqlConnection(connexionString))
             {
-                OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
-                using (var package = new ExcelPackage(new FileInfo("MetroParis.xlsx")))
+                con.Open();
+
+                // Vérifier si l'email existe déjà
+                string checkEmailQuery = "SELECT COUNT(*) FROM utilisateurs WHERE email = @email";
+                MySqlCommand checkEmail = new MySqlCommand(checkEmailQuery, con);
+                checkEmail.Parameters.AddWithValue("@email", utilisateur.Email);
+                
+                int count = Convert.ToInt32(checkEmail.ExecuteScalar());
+                if (count > 0)
                 {
-                    var worksheet = package.Workbook.Worksheets[0];
-                    this.rows = worksheet.Dimension.Rows;
-                    this.cols = worksheet.Dimension.Columns;
+                    throw new Exception("Cet email est déjà utilisé.");
                 }
-            }
-            else
-            {
-                Console.WriteLine("Fichier introuvable !");
-            }
-            this.clients = new List<Personne>();
-            this.cuisiniers = new List<Personne>();
-            this.users = new List<Personne>();
-        }
 
-        public void ChargerPersonnes()
-        {
-            for (int i = 2; i <= rows; i++)
-            {
-                Personne personne = new Personne(i);
-                if (personne.Role.ToLower() == "client")
-                { clients.Add(personne); }
-                else
-                { cuisiniers.Add(personne); }
-                users.Add(personne);
+                // Créer l'utilisateur
+                string insertQuery = "INSERT INTO utilisateurs (prenom, nom, adresse, station_metro, mot_de_passe, role, email) " +
+                                   "VALUES (@prenom, @nom, @adresse, @stationMetro, @motDePasse, @role, @email)";
+                
+                MySqlCommand cmd = new MySqlCommand(insertQuery, con);
+                cmd.Parameters.AddWithValue("@prenom", utilisateur.Prenom);
+                cmd.Parameters.AddWithValue("@nom", utilisateur.Nom);
+                cmd.Parameters.AddWithValue("@adresse", utilisateur.Adresse);
+                cmd.Parameters.AddWithValue("@stationMetro", utilisateur.StationMetro);
+                cmd.Parameters.AddWithValue("@motDePasse", utilisateur.MotDePasse);
+                cmd.Parameters.AddWithValue("@role", utilisateur.Role);
+                cmd.Parameters.AddWithValue("@email", utilisateur.Email);
+                
+                cmd.ExecuteNonQuery();
             }
         }
 
-        public void ChargePersonneRole()
+        public static Personne AuthentifierUtilisateur(string email, string motDePasse)
         {
-
-        }
-
-        public void RemplirSQL()
-        {
-            string connectionString = "SERVER=localhost;PORT=3306;DATABASE=LIVRABLE2;UID=root;PASSWORD=Root";
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection con = new MySqlConnection(connexionString))
             {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
+                con.Open();
+                
+                string query = "SELECT * FROM utilisateurs WHERE email = @email AND mot_de_passe = @motDePasse";
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@motDePasse", motDePasse);
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
-                    foreach (var client in clients)
+                    if (reader.Read())
                     {
-                        cmd.CommandText = "INSERT INTO clients (prenom, nom, adresse, station_metro, mot_de_passe) VALUES (@prenom, @nom, @adresse, @stationMetro, @motDePasse)";
-                        cmd.Parameters.Clear();
-                        cmd.Parameters.AddWithValue("@prenom", client.Prenom);
-                        cmd.Parameters.AddWithValue("@nom", client.Nom);
-                        cmd.Parameters.AddWithValue("@adresse", client.Adresse);
-                        cmd.Parameters.AddWithValue("@stationMetro", client.StationMetro);
-                        cmd.Parameters.AddWithValue("@motDePasse", client.MotDePasse);
-                        cmd.ExecuteNonQuery();
-                    }
-                    foreach (var cuisinier in cuisiniers)
-                    {
-                        cmd.CommandText = "INSERT INTO cuisiniers (prenom, nom, adresse, station_metro, mot_de_passe) VALUES (@prenom, @nom, @adresse, @stationMetro, @motDePasse)";
-                        cmd.Parameters.Clear();
-                        cmd.Parameters.AddWithValue("@prenom", cuisinier.Prenom);
-                        cmd.Parameters.AddWithValue("@nom", cuisinier.Nom);
-                        cmd.Parameters.AddWithValue("@adresse", cuisinier.Adresse);
-                        cmd.Parameters.AddWithValue("@stationMetro", cuisinier.StationMetro);
-                        cmd.Parameters.AddWithValue("@motDePasse", cuisinier.MotDePasse);
-                        cmd.ExecuteNonQuery();
+                        Personne utilisateur = new Personne();
+                        utilisateur.Id = Convert.ToInt32(reader["id"]);
+                        utilisateur.Prenom = reader["prenom"].ToString();
+                        utilisateur.Nom = reader["nom"].ToString();
+                        utilisateur.Adresse = reader["adresse"].ToString();
+                        utilisateur.StationMetro = reader["station_metro"].ToString();
+                        utilisateur.Role = reader["role"].ToString();
+                        utilisateur.Email = reader["email"].ToString();
+                        
+                        return utilisateur;
                     }
                 }
             }
+            return null;
         }
-        public void RemplirSQLaddClient(Personne pers)
-        {
-            string connectionString = "SERVER=localhost;PORT=3306;DATABASE=LIVRABLE2;UID=root;PASSWORD=Root";
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                        cmd.CommandText = "INSERT INTO clients (prenom, nom, adresse, station_metro, mot_de_passe) VALUES (@prenom, @nom, @adresse, @stationMetro, @motDePasse)";
-                        cmd.Parameters.Clear();
-                        cmd.Parameters.AddWithValue("@prenom", pers.Prenom);
-                        cmd.Parameters.AddWithValue("@nom", pers.Nom);
-                        cmd.Parameters.AddWithValue("@adresse", pers.Adresse);
-                        cmd.Parameters.AddWithValue("@stationMetro", pers.StationMetro);
-                        cmd.Parameters.AddWithValue("@motDePasse", pers.MotDePasse);
-                        cmd.ExecuteNonQuery();
-                }
-            }
-        }
-        public void RemplirSQLaddCuisinier(Personne pers)
-        {
-            string connectionString = "SERVER=localhost;PORT=3306;DATABASE=LIVRABLE2;UID=root;PASSWORD=Root";
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = "INSERT INTO cuisiniers (prenom, nom, adresse, station_metro, mot_de_passe) VALUES (@prenom, @nom, @adresse, @stationMetro, @motDePasse)";
-                    cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@prenom", pers.Prenom);
-                    cmd.Parameters.AddWithValue("@nom", pers.Nom);
-                    cmd.Parameters.AddWithValue("@adresse", pers.Adresse);
-                    cmd.Parameters.AddWithValue("@stationMetro", pers.StationMetro);
-                    cmd.Parameters.AddWithValue("@motDePasse", pers.MotDePasse);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public int Rows { 
-            get { return rows; } 
-            set { rows = value; } 
-        }
-        public int Cols { 
-            get { return cols; }
-            set { cols = value; }
-        }
-        public List<Personne> Cuisiniers {
-            get { return cuisiniers; }
-            set { cuisiniers = value; }
-        }
-        public List<Personne> Clients {
-            get { return clients; }
-            set { clients = value; }
-        }
-        public List<Personne> Users {
-            get { return users; }
-            set { users = value; }
-        }
-
-
     }
 }
