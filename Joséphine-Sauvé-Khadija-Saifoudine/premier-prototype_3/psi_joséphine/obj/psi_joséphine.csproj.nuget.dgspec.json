@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\josep\\Joséphine Cours\\ESILV Année 2\\S4\\PSI\\rendu_3\\premier-prototype_3 - avec commentaire\\premier-prototype_3\\psi_joséphine\\psi_joséphine.csproj": {}
+    "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Joséphine-Sauvé-Khadija-Saifoudine\\premier-prototype_3\\psi_joséphine\\psi_joséphine.csproj": {}
   },
   "projects": {
-    "C:\\Users\\josep\\Joséphine Cours\\ESILV Année 2\\S4\\PSI\\rendu_3\\premier-prototype_3 - avec commentaire\\premier-prototype_3\\psi_joséphine\\psi_joséphine.csproj": {
+    "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Joséphine-Sauvé-Khadija-Saifoudine\\premier-prototype_3\\psi_joséphine\\psi_joséphine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\josep\\Joséphine Cours\\ESILV Année 2\\S4\\PSI\\rendu_3\\premier-prototype_3 - avec commentaire\\premier-prototype_3\\psi_joséphine\\psi_joséphine.csproj",
+        "projectUniqueName": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Joséphine-Sauvé-Khadija-Saifoudine\\premier-prototype_3\\psi_joséphine\\psi_joséphine.csproj",
         "projectName": "psi_joséphine",
-        "projectPath": "C:\\Users\\josep\\Joséphine Cours\\ESILV Année 2\\S4\\PSI\\rendu_3\\premier-prototype_3 - avec commentaire\\premier-prototype_3\\psi_joséphine\\psi_joséphine.csproj",
+        "projectPath": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Joséphine-Sauvé-Khadija-Saifoudine\\premier-prototype_3\\psi_joséphine\\psi_joséphine.csproj",
         "packagesPath": "C:\\Users\\josep\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\josep\\Joséphine Cours\\ESILV Année 2\\S4\\PSI\\rendu_3\\premier-prototype_3 - avec commentaire\\premier-prototype_3\\psi_joséphine\\obj\\",
+        "outputPath": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Joséphine-Sauvé-Khadija-Saifoudine\\premier-prototype_3\\psi_joséphine\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

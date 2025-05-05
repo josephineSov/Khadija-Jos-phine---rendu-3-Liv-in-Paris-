@@ -18,7 +18,7 @@ namespace psi_joséphine
         private Dictionary<string, Color> couleursLignes;
         private const int TAILLE_STATION = 4;
         private const int EPAISSEUR_LIGNE = 2;
-        private const string CHEMIN_IMAGE = "carte_metro.png";
+        private const string CHEMIN_IMAGE = "carte_metro_PARIS.png";
 
         static AfficheGraphe()
         {
@@ -37,22 +37,23 @@ namespace psi_joséphine
         {
             couleursLignes = new Dictionary<string, Color>
             {
-                {"1", Color.FromArgb(255, 255, 168, 0)},    // Orange vif
-                {"2", Color.FromArgb(255, 0, 90, 255)},     // Bleu roi
-                {"3", Color.FromArgb(255, 149, 179, 64)},   // Vert olive
-                {"3bis", Color.FromArgb(255, 137, 207, 240)}, // Bleu ciel
-                {"4", Color.FromArgb(255, 187, 76, 158)},   // Violet
-                {"5", Color.FromArgb(255, 255, 140, 0)},    // Orange
-                {"6", Color.FromArgb(255, 118, 184, 86)},   // Vert clair
-                {"7", Color.FromArgb(255, 255, 155, 185)},  // Rose
-                {"7bis", Color.FromArgb(255, 255, 192, 203)}, // Rose clair
-                {"8", Color.FromArgb(255, 155, 50, 155)},   // Violet foncé
-                {"9", Color.FromArgb(255, 177, 199, 55)},   // Vert citron
-                {"10", Color.FromArgb(255, 225, 177, 0)},   // Or
-                {"11", Color.FromArgb(255, 139, 69, 19)},   // Marron
-                {"12", Color.FromArgb(255, 0, 154, 73)},    // Vert foncé
-                {"13", Color.FromArgb(255, 152, 251, 152)}, // Vert pâle
-                {"14", Color.FromArgb(255, 110, 20, 110)}   // Violet foncé
+
+        {"1", Color.FromArgb(255, 255, 200, 0)},      // Orange vif (plus chaud)
+        {"2", Color.FromArgb(255, 0, 102, 204)},      // Bleu roi (plus lisible)
+        {"3", Color.FromArgb(255, 178, 153, 0)},      // Ocre jaune / Olive foncé
+        {"3bis", Color.FromArgb(255, 100, 190, 255)}, // Bleu ciel doux
+        {"4", Color.FromArgb(255, 170, 50, 140)},     // Violet soutenu
+        {"5", Color.FromArgb(255, 255, 120, 0)},      // Orange moyen
+        {"6", Color.FromArgb(255, 140, 200, 100)},    // Vert doux
+        {"7", Color.FromArgb(255, 255, 140, 170)},    // Rose clair
+        {"7bis", Color.FromArgb(255, 255, 182, 193)}, // Rose pastel
+        {"8", Color.FromArgb(255, 145, 70, 155)},     // Violet moyen
+        {"9", Color.FromArgb(255, 200, 210, 60)},     // Vert anis
+        {"10", Color.FromArgb(255, 240, 190, 0)},     // Or lumineux
+        {"11", Color.FromArgb(255, 120, 60, 20)},     // Marron foncé
+        {"12", Color.FromArgb(255, 0, 130, 60)},      // Vert forêt
+        {"13", Color.FromArgb(255, 170, 255, 170)},   // Vert menthe pâle
+        {"14", Color.FromArgb(255, 100, 0, 100)}      // Violet foncé intense
             };
         }
 
@@ -60,30 +61,18 @@ namespace psi_joséphine
         {
             try
             {
-                if (noeuds.Count == 0)
-                {
-                    Console.WriteLine("Erreur : Aucune station n'a été chargée.");
-                    return;
-                }
-
-                if (liens.Count == 0)
-                {
-                    Console.WriteLine("Erreur : Aucune connexion entre les stations n'a été chargée.");
-                    return;
-                }
-
-                Console.WriteLine($"Nombre de stations chargées : {noeuds.Count}");
-                Console.WriteLine($"Nombre de connexions chargées : {liens.Count}");
+                Console.WriteLine("\n Les couleurs des lignes de métro sur le graphe correspondent aux couleurs des lignes dans la réalité");
+               
 
                 DessinerGraphe();
-                Console.WriteLine("\n=== Carte du Métro de Paris ===");
-                Console.WriteLine($"L'image de la carte a été créée avec succès : {CHEMIN_IMAGE}");
-                Console.WriteLine("\nAppuyez sur une touche pour continuer...");
+                Console.WriteLine("\n - Carte du Métro de Paris - ");
+                Console.WriteLine($"L'image de la carte se trouve dans le fichier bin - Debug - net6.0-windows : {CHEMIN_IMAGE}");
+                Console.WriteLine("\nAppuyer pour continuer");
                 Console.ReadKey();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erreur lors de la création de l'image : {ex.Message}");
+                Console.WriteLine($"Erreur : {ex.Message}");
                 Console.WriteLine($"Détails de l'erreur : {ex.StackTrace}");
             }
         }
@@ -127,7 +116,7 @@ namespace psi_joséphine
                     int x = (int)((noeud.Lon - minLon) / (maxLon - minLon) * (largeur - 200) + 100);
                     int y = (int)((maxLat - noeud.Lat) / (maxLat - minLat) * (hauteur - 200) + 100);
 
-                    using (Brush pinceau = new SolidBrush(Color.White))
+                    using (Brush pinceau = new SolidBrush(Color.Black))
                     using (Pen crayon = new Pen(Color.Black, 1))
                     {
                         g.FillEllipse(pinceau, x - TAILLE_STATION/2, y - TAILLE_STATION/2, 
@@ -137,38 +126,18 @@ namespace psi_joséphine
                     }
                 }
 
-                // Dessiner la légende
-                DessinerLegende(g, largeur, hauteur);
+                // Titre centré en haut
+                using (Font fontTitre = new Font("Arial", 24, FontStyle.Bold))
+                using (Brush pinceauTitre = new SolidBrush(Color.Black))
+                {
+                    string titre = "Carte Métro Paris - Joséphine Sauvé et Khadija Saifoudine";
+                    SizeF dim = g.MeasureString(titre, fontTitre);
+                    float xTitre = (largeur - dim.Width) / 2;
+                    g.DrawString(titre, fontTitre, pinceauTitre, xTitre, 10);
+                }
 
                 // Sauvegarder l'image
                 image.Save(CHEMIN_IMAGE, ImageFormat.Png);
-            }
-        }
-
-        private void DessinerLegende(Graphics g, int largeur, int hauteur)
-        {
-            int positionX = largeur - 150;
-            int positionY = 20;
-            int hauteurLigne = 20;
-            
-            using (Font police = new Font("Arial", 8))
-            using (Brush pinceauTexte = new SolidBrush(Color.Black))
-            {
-                g.FillRectangle(new SolidBrush(Color.White), 
-                    positionX - 10, positionY - 10, 140, (couleursLignes.Count * hauteurLigne) + 20);
-                g.DrawRectangle(new Pen(Color.Black, 1), 
-                    positionX - 10, positionY - 10, 140, (couleursLignes.Count * hauteurLigne) + 20);
-
-                foreach (var ligne in couleursLignes.OrderBy(l => l.Key.Length > 1 ? 
-                    int.Parse(l.Key.Replace("bis", "")) + 0.5 : int.Parse(l.Key)))
-                {
-                    using (Pen crayon = new Pen(ligne.Value, EPAISSEUR_LIGNE))
-                    {
-                        g.DrawLine(crayon, positionX, positionY + 5, positionX + 25, positionY + 5);
-                        g.DrawString($"Ligne {ligne.Key}", police, pinceauTexte, positionX + 30, positionY);
-                    }
-                    positionY += hauteurLigne;
-                }
             }
         }
     }

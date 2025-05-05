@@ -2573,11 +2573,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\josep\\Joséphine Cours\\ESILV Année 2\\S4\\PSI\\rendu_3\\premier-prototype_3 - avec commentaire\\premier-prototype_3\\Affichage2\\Affichage2.csproj",
+      "projectUniqueName": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Joséphine-Sauvé-Khadija-Saifoudine\\premier-prototype_3\\Affichage2\\Affichage2.csproj",
       "projectName": "Affichage2",
-      "projectPath": "C:\\Users\\josep\\Joséphine Cours\\ESILV Année 2\\S4\\PSI\\rendu_3\\premier-prototype_3 - avec commentaire\\premier-prototype_3\\Affichage2\\Affichage2.csproj",
+      "projectPath": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Joséphine-Sauvé-Khadija-Saifoudine\\premier-prototype_3\\Affichage2\\Affichage2.csproj",
       "packagesPath": "C:\\Users\\josep\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\josep\\Joséphine Cours\\ESILV Année 2\\S4\\PSI\\rendu_3\\premier-prototype_3 - avec commentaire\\premier-prototype_3\\Affichage2\\obj\\",
+      "outputPath": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Joséphine-Sauvé-Khadija-Saifoudine\\premier-prototype_3\\Affichage2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2599,8 +2599,8 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\josep\\Joséphine Cours\\ESILV Année 2\\S4\\PSI\\rendu_3\\premier-prototype_3 - avec commentaire\\premier-prototype_3\\psi_joséphine\\psi_joséphine.csproj": {
-              "projectPath": "C:\\Users\\josep\\Joséphine Cours\\ESILV Année 2\\S4\\PSI\\rendu_3\\premier-prototype_3 - avec commentaire\\premier-prototype_3\\psi_joséphine\\psi_joséphine.csproj"
+            "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Joséphine-Sauvé-Khadija-Saifoudine\\premier-prototype_3\\psi_joséphine\\psi_joséphine.csproj": {
+              "projectPath": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Joséphine-Sauvé-Khadija-Saifoudine\\premier-prototype_3\\psi_joséphine\\psi_joséphine.csproj"
             }
           }
         }

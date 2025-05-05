@@ -59,19 +59,19 @@ namespace psi_joséphine
             // Menu pour utilisateur non connecté
             if (utilisateur == null)
             {
-                Console.WriteLine("=== Menu Principal ===");
+                Console.WriteLine("- Menu Principal -");
                 Console.WriteLine("1. Se connecter");
                 Console.WriteLine("2. Créer un compte");
                 Console.WriteLine("3. Afficher la carte du métro");
                 Console.WriteLine("4. Afficher le graphe des utilisateurs");
                 Console.WriteLine("5. Module Statistiques");
-                Console.WriteLine("6. AlgoWelshPowell");
+                Console.WriteLine("6. Algo WelshPowell");
                 Console.WriteLine("7. Quitter");
             }
             // Menu pour utilisateur connecté
             else
             {
-                Console.WriteLine("=== Menu Utilisateur ===");
+                Console.WriteLine(" - Menu Utilisateur -");
                 Console.WriteLine("Bienvenue " + utilisateur.GetInfo());
                 
                 bool estCuisinier = (utilisateur.Role == "cuisinier" || utilisateur.Role == "client_cuisinier");
@@ -451,7 +451,7 @@ namespace psi_joséphine
             bool continuer = true;
             while (continuer)
             {
-                Console.WriteLine("\n=== Module Statistiques ===");
+                Console.WriteLine("\n- Module Statistiques -");
                 Console.WriteLine("1. Afficher le nombre de livraisons par cuisinier");
                 Console.WriteLine("2. Afficher les commandes par période");
                 Console.WriteLine("3. Afficher la moyenne des prix des commandes");
