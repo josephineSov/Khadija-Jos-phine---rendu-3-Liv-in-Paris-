@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Jos\u00E9phine-Sauv\u00E9-Khadija-Saifoudine\\premier-prototype_3\\psi_jos\u00E9phine\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0B4AE11B-8F28-4B22-87EA-7E583F50094B}|psi_jos\u00E9phine.csproj|c:\\users\\josep\\documents\\github\\khadija-jos-phine---rendu-3-liv-in-paris-\\jos\u00E9phine-sauv\u00E9-khadija-saifoudine\\premier-prototype_3\\psi_jos\u00E9phine\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B4AE11B-8F28-4B22-87EA-7E583F50094B}|psi_jos\u00E9phine.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0B4AE11B-8F28-4B22-87EA-7E583F50094B}|psi_jos\u00E9phine.csproj|c:\\users\\josep\\documents\\github\\khadija-jos-phine---rendu-3-liv-in-paris-\\jos\u00E9phine-sauv\u00E9-khadija-saifoudine\\premier-prototype_3\\psi_jos\u00E9phine\\affichegraphe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0B4AE11B-8F28-4B22-87EA-7E583F50094B}|psi_jos\u00E9phine.csproj|solutionrelative:affichegraphe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0B4AE11B-8F28-4B22-87EA-7E583F50094B}|psi_jos\u00E9phine.csproj|c:\\users\\josep\\documents\\github\\khadija-jos-phine---rendu-3-liv-in-paris-\\jos\u00E9phine-sauv\u00E9-khadija-saifoudine\\premier-prototype_3\\psi_jos\u00E9phine\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0B4AE11B-8F28-4B22-87EA-7E583F50094B}|psi_jos\u00E9phine.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0B4AE11B-8F28-4B22-87EA-7E583F50094B}|psi_jos\u00E9phine.csproj|c:\\users\\josep\\documents\\github\\khadija-jos-phine---rendu-3-liv-in-paris-\\jos\u00E9phine-sauv\u00E9-khadija-saifoudine\\premier-prototype_3\\psi_jos\u00E9phine\\metros.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B4AE11B-8F28-4B22-87EA-7E583F50094B}|psi_jos\u00E9phine.csproj|solutionrelative:metros.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7ABD9FCB-0268-4874-934E-77BA87828CAE}|..\\Affichage2\\Affichage2.csproj|c:\\users\\josep\\documents\\github\\khadija-jos-phine---rendu-3-liv-in-paris-\\jos\u00E9phine-sauv\u00E9-khadija-saifoudine\\premier-prototype_3\\affichage2\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -30,10 +34,6 @@
       "RelativeMoniker": "D:0:0:{0B4AE11B-8F28-4B22-87EA-7E583F50094B}|psi_jos\u00E9phine.csproj|solutionrelative:personne.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0B4AE11B-8F28-4B22-87EA-7E583F50094B}|psi_jos\u00E9phine.csproj|c:\\users\\josep\\documents\\github\\khadija-jos-phine---rendu-3-liv-in-paris-\\jos\u00E9phine-sauv\u00E9-khadija-saifoudine\\premier-prototype_3\\psi_jos\u00E9phine\\metros.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0B4AE11B-8F28-4B22-87EA-7E583F50094B}|psi_jos\u00E9phine.csproj|solutionrelative:metros.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0B4AE11B-8F28-4B22-87EA-7E583F50094B}|psi_jos\u00E9phine.csproj|c:\\users\\josep\\documents\\github\\khadija-jos-phine---rendu-3-liv-in-paris-\\jos\u00E9phine-sauv\u00E9-khadija-saifoudine\\premier-prototype_3\\psi_jos\u00E9phine\\baseutilisateur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0B4AE11B-8F28-4B22-87EA-7E583F50094B}|psi_jos\u00E9phine.csproj|solutionrelative:baseutilisateur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -53,7 +53,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -61,45 +61,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Form1.Designer.cs",
               "DocumentMoniker": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Jos\u00E9phine-Sauv\u00E9-Khadija-Saifoudine\\premier-prototype_3\\Affichage2\\Form1.Designer.cs",
               "RelativeDocumentMoniker": "..\\Affichage2\\Form1.Designer.cs",
               "ToolTip": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Jos\u00E9phine-Sauv\u00E9-Khadija-Saifoudine\\premier-prototype_3\\Affichage2\\Form1.Designer.cs",
               "RelativeToolTip": "..\\Affichage2\\Form1.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-05T15:02:36.104Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "AfficheGraphe.cs",
               "DocumentMoniker": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Jos\u00E9phine-Sauv\u00E9-Khadija-Saifoudine\\premier-prototype_3\\psi_jos\u00E9phine\\AfficheGraphe.cs",
               "RelativeDocumentMoniker": "AfficheGraphe.cs",
               "ToolTip": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Jos\u00E9phine-Sauv\u00E9-Khadija-Saifoudine\\premier-prototype_3\\psi_jos\u00E9phine\\AfficheGraphe.cs",
               "RelativeToolTip": "AfficheGraphe.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEQAAABvAAAAAAAAAA==",
+              "ViewState": "AgIAADwAAAAAAAAAAAAYwBwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-01T15:18:08.212Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "Metros.cs",
               "DocumentMoniker": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Jos\u00E9phine-Sauv\u00E9-Khadija-Saifoudine\\premier-prototype_3\\psi_jos\u00E9phine\\Metros.cs",
               "RelativeDocumentMoniker": "Metros.cs",
               "ToolTip": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Jos\u00E9phine-Sauv\u00E9-Khadija-Saifoudine\\premier-prototype_3\\psi_jos\u00E9phine\\Metros.cs",
               "RelativeToolTip": "Metros.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMQAAABfAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAwPwAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T01:04:12.442Z"
+              "WhenOpened": "2025-04-20T01:04:12.442Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Noeud.cs",
               "DocumentMoniker": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Jos\u00E9phine-Sauv\u00E9-Khadija-Saifoudine\\premier-prototype_3\\psi_jos\u00E9phine\\Noeud.cs",
               "RelativeDocumentMoniker": "Noeud.cs",
@@ -111,20 +112,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Jos\u00E9phine-Sauv\u00E9-Khadija-Saifoudine\\premier-prototype_3\\psi_jos\u00E9phine\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Jos\u00E9phine-Sauv\u00E9-Khadija-Saifoudine\\premier-prototype_3\\psi_jos\u00E9phine\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAH4DAAAAAAAAAAAAAMUBAAA8AAAAAAAAAA==",
+              "ViewState": "AgIAAA8BAAAAAAAAAAAowEYBAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-20T01:01:32.155Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Lien.cs",
               "DocumentMoniker": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Jos\u00E9phine-Sauv\u00E9-Khadija-Saifoudine\\premier-prototype_3\\psi_jos\u00E9phine\\Lien.cs",
               "RelativeDocumentMoniker": "Lien.cs",
@@ -132,12 +133,11 @@
               "RelativeToolTip": "Lien.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T01:03:53.248Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-20T01:03:53.248Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "GrapheUtilisateur.cs",
               "DocumentMoniker": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Jos\u00E9phine-Sauv\u00E9-Khadija-Saifoudine\\premier-prototype_3\\psi_jos\u00E9phine\\GrapheUtilisateur.cs",
               "RelativeDocumentMoniker": "GrapheUtilisateur.cs",
@@ -173,7 +173,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Personne.cs",
               "DocumentMoniker": "C:\\Users\\josep\\Documents\\GitHub\\Khadija-Jos-phine---rendu-3-Liv-in-Paris-\\Jos\u00E9phine-Sauv\u00E9-Khadija-Saifoudine\\premier-prototype_3\\psi_jos\u00E9phine\\Personne.cs",
               "RelativeDocumentMoniker": "Personne.cs",

@@ -99,6 +99,51 @@ namespace psi_joséphine
             Console.Write("Choix: ");
         }
 
+        static void AjouterPlat(Personne cuisinier)
+        {
+            Console.WriteLine("\n=== Ajouter un nouveau plat ===");
+
+            // Créer un nouveau plat
+            Plat nouveauPlat = new Plat();
+
+            // Demander les informations du plat
+            Console.Write("Nom du plat: ");
+            nouveauPlat.Nom = Console.ReadLine();
+
+            Console.Write("Prix (en euros): ");
+            if (!decimal.TryParse(Console.ReadLine(), out decimal prix))
+            {
+                Console.WriteLine("Prix invalide. Veuillez entrer un nombre valide.");
+                return;
+            }
+            nouveauPlat.Prix = prix;
+
+            Console.Write("Nombre de personnes: ");
+            if (!int.TryParse(Console.ReadLine(), out int nbPersonnes))
+            {
+                Console.WriteLine("Nombre de personnes invalide. Veuillez entrer un nombre entier valide.");
+                return;
+            }
+            nouveauPlat.NbDePersonne = nbPersonnes;
+
+            // Vérifier que les champs obligatoires sont remplis
+            if (string.IsNullOrEmpty(nouveauPlat.Nom))
+            {
+                Console.WriteLine("Le nom du plat est requis.");
+                return;
+            }
+
+            try
+            {
+                // Ajouter le plat à la base de données
+                Personne.AjouterPlat(nouveauPlat, cuisinier.Id);
+                Console.WriteLine("Plat ajouté avec succès !");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur lors de l'ajout du plat: " + ex.Message);
+            }
+        }
         static void GererMenuNonConnecte(string choix, ref Personne utilisateurConnecte, AfficheGraphe afficheGraphe)
         {
             switch (choix) // execute une action différente selon la valeur du choix 
@@ -222,7 +267,9 @@ namespace psi_joséphine
         static void GererMenuConnecte(string choix, ref Personne utilisateurConnecte, GrapheUtilisateur grapheUtilisateur)
         {
             bool estCuisinier = (utilisateurConnecte.Role == "cuisinier" || utilisateurConnecte.Role == "client_cuisinier");
-            
+            bool estClient = utilisateurConnecte.Role == "client";
+
+
             switch (choix)
             {
                 case "1": // Afficher les plats
@@ -262,15 +309,26 @@ namespace psi_joséphine
                     }
                     break;
 
-                case "5": // Déconnexion pour cuisiniers
-                    if (estCuisinier)
+                case "5": // Déconnexion pour client ou ajout plat pour cuisinier
+                    if (estClient)
                     {
                         Deconnecter(ref utilisateurConnecte);
+                    }
+                    else if (estCuisinier)
+                    {
+                        AjouterPlat(utilisateurConnecte);
                     }
                     else
                     {
                         Console.WriteLine("Choix invalide.");
                     }
+                    break;
+                case "6": /// Déconnexion pour cuisiniers
+                    if (estCuisinier)
+                    {
+                        Deconnecter(ref utilisateurConnecte);
+                    }
+                    
                     break;
 
                 default:
@@ -713,7 +771,8 @@ namespace psi_joséphine
                     con.Open();
                     var command = con.CreateCommand();
                     string requete = "SELECT c.id, c.date_creation, c.statut, u.prenom, u.nom, u.adresse " +"FROM commande c " +
-                                   "JOIN utilisateurs u ON c.client_id = u.id " +"WHERE c.cuisinier_id = @cuisinierId " + "ORDER BY c.date_creation DESC"; 
+                                   "JOIN utilisateurs u ON c.client_id = u.id " +"WHERE c.cuisinier_id = @cuisinierId " + "ORDER BY c.date_creation DESC";
+                    command.CommandText = requete;
                     command.Parameters.AddWithValue("@cuisinierId", cuisinier.Id);
 
                     var reader = command.ExecuteReader();
