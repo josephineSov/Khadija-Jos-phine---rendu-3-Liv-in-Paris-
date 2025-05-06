@@ -21,13 +21,6 @@ namespace psi_joséphine
         List<string> listeligne; // liste des lignes passant par cette station
         int couleur;
 
-        static Noeud()
-        {
-            // Définir la licence EPPlus avec la nouvelle syntaxe pour EPPlus 8
-            ExcelPackage.License.SetNonCommercialPersonal("Joséphine"); 
-
-
-        }
 
         public Noeud(int exligne) // Crée un objet Noeud à partir d'une ligne donnée dans le fichier Excel "MetroParis.xlsx".
 

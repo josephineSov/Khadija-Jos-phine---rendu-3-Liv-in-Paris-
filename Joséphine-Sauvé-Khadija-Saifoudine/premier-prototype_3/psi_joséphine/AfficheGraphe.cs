@@ -20,12 +20,6 @@ namespace psi_joséphine
         private const int EPAISSEUR_LIGNE = 2;
         private const string CHEMIN_IMAGE = "carte_metro_PARIS.png";
 
-       /* static AfficheGraphe()
-        {
-            // Définir la licence EPPlus avec la nouvelle syntaxe pour EPPlus 8
-            ExcelPackage.License.SetNonCommercialPersonal("Joséphine");
-        }
-       */
 
         public AfficheGraphe(List<Noeud> noeuds, List<Lien> liens)
         {

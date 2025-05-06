@@ -9,36 +9,36 @@ namespace psi_joséphine
 {
     public class GrapheUtilisateur
     {
-        private const int NODE_RADIUS = 20;
-        private const int NODE_SPACING_X = 150;
-        private const int NODE_SPACING_Y = 100;
-        private const int LEGEND_HEIGHT = 50;
-        private const int IMAGE_WIDTH = 1200;
-        private const int IMAGE_HEIGHT = 800;
+        private const int NODE_RADIUS = 15;    //Rayon en pixels des nœuds (cercles) qui seront dessinés.
+        private const int NODE_SPACING_X = 150; //Espacement horizontal et vertical entre les nœuds du graphe
+        private const int NODE_SPACING_Y = 100; // ""
+        private const int LEGEND_HEIGHT = 50; // hauteur pour la légende 
+        private const int IMAGE_WIDTH = 1200; //
+        private const int IMAGE_HEIGHT = 800; // hauteur image 
         private static string connexionString = "SERVER=127.0.0.1;PORT=3306;DATABASE=psi_LivinParis;UID=root;PASSWORD=Root";
 
         public static void AfficherGraphe()
         {
             try
             {
-                Bitmap bitmap = new Bitmap(IMAGE_WIDTH, IMAGE_HEIGHT);
-                Graphics graphics = Graphics.FromImage(bitmap);
-                
+                Bitmap bitmap = new Bitmap(IMAGE_WIDTH, IMAGE_HEIGHT); //  zone de dessin en mémoire.
+                Graphics graphics = Graphics.FromImage(bitmap); // objet utilisé pour toutes les opérations de dessin sur ce bitmap.
+
                 // Remplir le fond en blanc
                 graphics.Clear(Color.White);
 
                 // Activer l'antialiasing pour un meilleur rendu
-                graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                // graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
                 DessinerGraphe(graphics, IMAGE_WIDTH, IMAGE_HEIGHT);
 
                 // Sauvegarder l'image
-                bitmap.Save("graphe_commandes.png", ImageFormat.Png);
-                Console.WriteLine("Le graphe a été sauvegardé dans 'graphe_commandes.png'");
-                
-                // Libérer les ressources
-                graphics.Dispose();
-                bitmap.Dispose();
+                bitmap.Save("graphe_clients_cuisiniers.png", ImageFormat.Png);
+                Console.WriteLine("Le graphe a été sauvegardé dans bin");
+
+                // Libérer les ressources - Important pour éviter les fuites de mémoire
+               graphics.Dispose();
+               bitmap.Dispose();
             }
             catch (Exception ex)
             {
@@ -48,12 +48,13 @@ namespace psi_joséphine
 
         private static void DessinerGraphe(Graphics g, int width, int height)
         {
-            List<Personne> utilisateurs = GetUtilisateurs();
-            List<Commande> commandes = GetCommandes();
+            List<Personne> utilisateurs = GetUtilisateurs(); //appelle votre couche d’accès aux données pour charger tous les utilisateurs
+            List<Commande> commandes = GetCommandes(); // charge toutes les commandes passées.
+
 
             // Séparer les cuisiniers et les clients
-            List<Personne> cuisiniers = new List<Personne>();
-            List<Personne> clients = new List<Personne>();
+            List<Personne> cuisiniers = new List<Personne>(); // cuisiniers pour stocker tous ceux dont le rôle inclut la préparation
+            List<Personne> clients = new List<Personne>(); 
 
             // Trier les utilisateurs entre cuisiniers et clients
             foreach (Personne utilisateur in utilisateurs)
@@ -70,18 +71,18 @@ namespace psi_joséphine
 
             // Dictionnaire pour stocker les positions des utilisateurs
             Dictionary<int, Point> positions = new Dictionary<int, Point>();
-            
+
             // Positionner les cuisiniers en haut
             int y = 100;
             for (int i = 0; i < cuisiniers.Count; i++)
             {
-                int x = (width / (cuisiniers.Count + 1)) * (i + 1);
+                int x = (width / (clients.Count + 1)) * (i + 1);
                 if (!positions.ContainsKey(cuisiniers[i].Id))
                 {
                     positions.Add(cuisiniers[i].Id, new Point(x, y));
                 }
             }
-
+            
             // Positionner les clients en bas
             y = height - 200;
             for (int i = 0; i < clients.Count; i++)
@@ -102,7 +103,7 @@ namespace psi_joséphine
                     Point endPoint = positions[commande.CuisinierId];
 
                     // Dessiner une flèche verte avec un contour noir
-                    Pen pen = new Pen(Color.Green, 2);
+                    Pen pen = new Pen(Color.Black, 2);
                     pen.CustomEndCap = new System.Drawing.Drawing2D.AdjustableArrowCap(5, 5);
                     g.DrawLine(pen, startPoint.X, startPoint.Y, endPoint.X, endPoint.Y);
                     pen.Dispose();
@@ -120,11 +121,11 @@ namespace psi_joséphine
                     // Choisir la couleur selon le rôle
                     if (utilisateur.Role == "cuisinier" || utilisateur.Role == "client_cuisinier")
                     {
-                        brush = Brushes.Red;
+                        brush = Brushes.Green;
                     }
                     else
                     {
-                        brush = Brushes.Blue;
+                        brush = Brushes.Orange;
                     }
 
                     // Dessiner le cercle avec un contour noir
@@ -136,25 +137,25 @@ namespace psi_joséphine
                     Font font = new Font("Arial", 8);
                     SizeF size = g.MeasureString(nom, font);
                     g.FillRectangle(Brushes.White, position.X - size.Width/2, position.Y + NODE_RADIUS, size.Width, size.Height);
-                    g.DrawString(nom, font, Brushes.Black, position.X - size.Width/2, position.Y + NODE_RADIUS);
-                    font.Dispose();
+                   g.DrawString(nom, font, Brushes.Black, position.X - size.Width/2, position.Y + NODE_RADIUS);
+                   font.Dispose();
                 }
             }
 
             // Dessiner la légende
             int legendY = height - LEGEND_HEIGHT;
-            g.FillRectangle(Brushes.White, 0, legendY, width, LEGEND_HEIGHT);
+            //g.FillRectangle(Brushes.White, 0, legendY, width, LEGEND_HEIGHT);
             
             // Dessiner les éléments de la légende
             Font legendFont = new Font("Arial", 10);
             
-            g.FillEllipse(Brushes.Red, 10, legendY + 5, 15, 15);
+            g.FillEllipse(Brushes.Green, 10, legendY + 5, 15, 15);
             g.DrawString("Cuisiniers", legendFont, Brushes.Black, 30, legendY + 5);
             
-            g.FillEllipse(Brushes.Blue, 150, legendY + 5, 15, 15);
+            g.FillEllipse(Brushes.Orange, 150, legendY + 5, 15, 15);
             g.DrawString("Clients", legendFont, Brushes.Black, 170, legendY + 5);
             
-            Pen legendPen = new Pen(Color.Green, 2);
+            Pen legendPen = new Pen(Color.Black, 2);
             g.DrawLine(legendPen, 300, legendY + 12, 350, legendY + 12);
             g.DrawString("Commandes", legendFont, Brushes.Black, 360, legendY + 5);
             
@@ -165,8 +166,8 @@ namespace psi_joséphine
 
         private static List<Personne> GetUtilisateurs()
         {
-            List<Personne> utilisateurs = new List<Personne>();
-            MySqlConnection con = new MySqlConnection(connexionString);
+            List<Personne> utilisateurs = new List<Personne>(); //Initialisation d’une liste vide de Personne qui contiendra le résultat.
+            MySqlConnection con = new MySqlConnection(connexionString); // connexion avec sql
             
             try
             {
@@ -231,16 +232,16 @@ namespace psi_joséphine
             List<Commande> commandes = GetCommandes();
 
 
-            Dictionary<int, List<int>> voisins = new Dictionary<int, List<int>>();
+            Dictionary<int, List<int>> voisins = new Dictionary<int, List<int>>(); 
 
             foreach (Personne p in utilisateurs)
             {
-                voisins[p.Id] = new List<int>();
+                voisins[p.Id] = new List<int>(); // Pour chaque utilisateur, crée une entrée dans voisins avec son Id et une liste vide.
             }
 
-            foreach (Commande commande in commandes)
+            foreach (Commande commande in commandes) 
             {
-                if (!voisins[commande.ClientId].Contains(commande.CuisinierId))
+                if (!voisins[commande.ClientId].Contains(commande.CuisinierId)) // crée la liste d'adjacence - récupère l’ID du client impliqué - 
                 {
                     voisins[commande.ClientId].Add(commande.CuisinierId);
                 }
@@ -251,7 +252,7 @@ namespace psi_joséphine
             }
 
 
-            Dictionary<int, int> degres = new Dictionary<int, int>();
+            Dictionary<int, int> degres = new Dictionary<int, int>(); // ca compte le nombre de voisins 
             foreach (Personne p in utilisateurs)
             {
                 degres[p.Id] = voisins[p.Id].Count;
@@ -264,13 +265,13 @@ namespace psi_joséphine
             }
 
 
-            for (int i = 0; i < sommetsTries.Count - 1; i++)
+            for (int i = 0; i < sommetsTries.Count - 1; i++) //liste sommetsTries est ordonnée de façon à avoir les IDs des utilisateurs du plus grand degré au plus petit.
             {
                 for (int j = i + 1; j < sommetsTries.Count; j++)
                 {
                     if (degres[sommetsTries[j]] > degres[sommetsTries[i]])
                     {
-                        int temp = sommetsTries[i];
+                        int temp = sommetsTries[i];  // echange de la valeur de i et j 
                         sommetsTries[i] = sommetsTries[j];
                         sommetsTries[j] = temp;
                     }
@@ -285,7 +286,7 @@ namespace psi_joséphine
             {
                 int idCourant = sommetsTries[i];
 
-                if (!couleurs.ContainsKey(idCourant))
+                if (!couleurs.ContainsKey(idCourant)) // si pas deja coloré 
                 {
                     couleurs[idCourant] = couleur;
 
@@ -313,25 +314,15 @@ namespace psi_joséphine
                 }
             }
 
-
-            Console.WriteLine(" Résultat de la coloration par Welsh-Powell :");
-            for (int i = 0; i < utilisateurs.Count; i++)
+            Console.WriteLine("Résultat de la coloration par Welsh-Powell :");
+            foreach (Personne p in utilisateurs)
             {
-                Personne p = null;
-                for (int j = 0; j < utilisateurs.Count; j++)
+                if (couleurs.ContainsKey(p.Id))
                 {
-                    if (utilisateurs[j].Id == utilisateurs[i].Id)
-                    {
-                        p = utilisateurs[j];
-                        break;
-                    }
-                }
-
-                if (p != null && couleurs.ContainsKey(p.Id))
-                {
-                    Console.WriteLine($" {p.GetNomComplet()} (ID {p.Id}) → Couleur {couleurs[p.Id]}");
+                    Console.WriteLine($" {p.GetNomComplet()} (ID {p.Id}) : Couleur {couleurs[p.Id]}");
                 }
             }
+
         }
     }
 } 
