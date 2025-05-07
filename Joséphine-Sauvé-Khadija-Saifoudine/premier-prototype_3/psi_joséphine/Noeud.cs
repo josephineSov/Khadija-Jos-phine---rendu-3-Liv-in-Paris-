@@ -22,16 +22,16 @@ namespace psi_joséphine
         int couleur;
 
 
-        public Noeud(int exligne) // Crée un objet Noeud à partir d'une ligne donnée dans le fichier Excel "MetroParis.xlsx".
+        public Noeud(int exligne) 
 
 
         {
             string filePath = "MetroParis.xlsx";
             if (File.Exists(filePath))
             {
-                using (var package = new ExcelPackage(new FileInfo(filePath))) // Ouvre le fichier Excel en lecture.
+                using (var package = new ExcelPackage(new FileInfo(filePath))) 
                 {
-                    var worksheet = package.Workbook.Worksheets[0];// accede a la premiere feuille du fichier 
+                    var worksheet = package.Workbook.Worksheets[0];
                     int rows = worksheet.Dimension.Rows;
                     int cols = worksheet.Dimension.Columns;
                     this.nom = Convert.ToString(worksheet.Cells[exligne, 3].Value);
@@ -39,7 +39,7 @@ namespace psi_joséphine
                     this.lon = Convert.ToDouble(worksheet.Cells[exligne, 4].Value, CultureInfo.InvariantCulture);
                     this.lat = Convert.ToDouble(worksheet.Cells[exligne, 5].Value, CultureInfo.InvariantCulture);
                     this.identifiant = Convert.ToInt32(worksheet.Cells[exligne, 1].Value);
-                    if (Convert.ToInt32(worksheet.Cells[exligne, 8].Value) == 1) // Teste si la station est à double sens (colonne 8 = 1).
+                    if (Convert.ToInt32(worksheet.Cells[exligne, 8].Value) == 1) 
                     {
                         this.doublesens = true;
                     }
@@ -53,7 +53,7 @@ namespace psi_joséphine
             {
                 Console.WriteLine("Fichier introuvable !");
             }
-            this.listeligne = new List<string> { this.ligne }; // Crée une liste contenant la ligne principale lue dans le fichier.
+            this.listeligne = new List<string> { this.ligne }; 
         }
 
         public List<string> ListeLigne

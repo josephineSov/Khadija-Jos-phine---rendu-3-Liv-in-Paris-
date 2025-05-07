@@ -13,8 +13,8 @@ namespace psi_joséphine
 {
     internal class AlgoRecherches
     {
-        int rows; // lignes
-        int cols; //colonnes
+        int rows; 
+        int cols;
         public List<Noeud> stations; 
         public List<Lien> liens;
         public List<Noeud> stationsExcel;
@@ -62,18 +62,18 @@ namespace psi_joséphine
                 Noeud nvnoeud = new Noeud(i);
                 if (!nomsUniques.ContainsKey(nvnoeud.Nom))
                 {
-                    nomsUniques[nvnoeud.Nom] = nvnoeud; // ajout au dico avec sa cle nom 
+                    nomsUniques[nvnoeud.Nom] = nvnoeud;  
                 }
                 else
                 {
-                    nomsUniques[nvnoeud.Nom].ListeLigne.Add(nvnoeud.Ligne); // creer une liste de ligne de stations de meme nom
+                    nomsUniques[nvnoeud.Nom].ListeLigne.Add(nvnoeud.Ligne); 
                 }
             }
         }
 
         public int MinDistance(double[] distances, bool[] visited)
         {
-            int n = matPonderee.GetLength(0); // initialise n à la taille de la matrice ponderée 
+            int n = matPonderee.GetLength(0);  
             double min = double.MaxValue;
             int minIndex = -1;
 

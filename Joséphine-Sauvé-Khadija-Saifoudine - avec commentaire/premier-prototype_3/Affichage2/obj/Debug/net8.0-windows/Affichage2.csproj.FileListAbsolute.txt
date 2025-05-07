@@ -1,0 +1,8 @@
+C:\Users\alibe\OneDrive\Bureau\psi_joséphine\dossier type\premier-prototype\Affichage2\obj\Debug\net8.0-windows\Affichage2.csproj.AssemblyReference.cache
+C:\Users\alibe\OneDrive\Bureau\psi_joséphine\dossier type\premier-prototype\Affichage2\obj\Debug\net8.0-windows\Affichage2.Form1.resources
+C:\Users\alibe\OneDrive\Bureau\psi_joséphine\dossier type\premier-prototype\Affichage2\obj\Debug\net8.0-windows\Affichage2.Program.resources
+C:\Users\alibe\OneDrive\Bureau\psi_joséphine\dossier type\premier-prototype\Affichage2\obj\Debug\net8.0-windows\Affichage2.csproj.GenerateResource.cache
+C:\Users\alibe\OneDrive\Bureau\psi_joséphine\dossier type\premier-prototype\Affichage2\obj\Debug\net8.0-windows\Affichage2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alibe\OneDrive\Bureau\psi_joséphine\dossier type\premier-prototype\Affichage2\obj\Debug\net8.0-windows\Affichage2.AssemblyInfoInputs.cache
+C:\Users\alibe\OneDrive\Bureau\psi_joséphine\dossier type\premier-prototype\Affichage2\obj\Debug\net8.0-windows\Affichage2.AssemblyInfo.cs
+C:\Users\alibe\OneDrive\Bureau\psi_joséphine\dossier type\premier-prototype\Affichage2\obj\Debug\net8.0-windows\Affichage2.csproj.CoreCompileInputs.cache

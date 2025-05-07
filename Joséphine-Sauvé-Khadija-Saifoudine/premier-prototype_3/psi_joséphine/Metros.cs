@@ -25,7 +25,6 @@ namespace psi_joséphine
 
         static Metros()
         {
-            // Définir la licence EPPlus avec la nouvelle syntaxe pour EPPlus 8
             ExcelPackage.License.SetNonCommercialPersonal("Joséphine");
         }
 

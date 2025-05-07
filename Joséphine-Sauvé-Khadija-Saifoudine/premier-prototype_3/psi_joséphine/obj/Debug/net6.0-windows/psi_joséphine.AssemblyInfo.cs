@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("psi_joséphine")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0db9cf412aefd3a5a7b25c85c4130ebf44c7da7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dbbbdaf9c5f884150870d8d739f4205207cb8518")]
 [assembly: System.Reflection.AssemblyProductAttribute("psi_joséphine")]
 [assembly: System.Reflection.AssemblyTitleAttribute("psi_joséphine")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

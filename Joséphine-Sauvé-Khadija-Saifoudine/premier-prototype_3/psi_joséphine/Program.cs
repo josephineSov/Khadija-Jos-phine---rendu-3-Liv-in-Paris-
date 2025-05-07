@@ -9,43 +9,43 @@ namespace psi_joséphine
     {
         static void Main(string[] args)
         {
-            // Initialisation des variables ( variable type personne initialisé à null -> aucun utilisateur connecté au démarrage) 
+            
             Personne utilisateurConnecte = null;
             
-            // Initialisation du système de métro
+      
             Metros metro = new Metros();
             metro.CreateStat();
             metro.CreationStation();
             metro.CreationLien();
             
-            // Création des objets pour l'affichage des graphes
+       
             AfficheGraphe afficheGraphe = new AfficheGraphe(metro.stations, metro.liens);
             GrapheUtilisateur grapheUtilisateur = new GrapheUtilisateur();
 
-            // Boucle principale du programme
-            bool continuer = true; // début d'une boucle continue jusqu'à false 
+          
+            bool continuer = true; 
             while (continuer)
             {
-                // Afficher le menu approprié
+                
                 AfficherMenu(utilisateurConnecte);
 
-                // Lire le choix de l'utilisateur
+                
                 string choix = Console.ReadLine();
                 
-                // Vérifier si le choix est vide
+                
                 if (string.IsNullOrEmpty(choix))
                 {
                     Console.WriteLine("Veuillez faire un choix valide.");
                     continue;
                 }
 
-                // Gérer le menu selon l'état de connexion
-                if (utilisateurConnecte == null) // vérifie si aucun utilisateur est connecté 
+               
+                if (utilisateurConnecte == null) 
                 {
-                    GererMenuNonConnecte(choix, ref utilisateurConnecte, afficheGraphe); // variable par ref ce qui permet à la méthode de modifier directement la variable (par exemple, connecter un utilisateur en cas de login).
+                    GererMenuNonConnecte(choix, ref utilisateurConnecte, afficheGraphe);
                 }
                 else
-                { // utilisateur déja connecté - accès au menu - variable en ref pour mettre a jour ou se déconnecter 
+                { 
                     GererMenuConnecte(choix, ref utilisateurConnecte, grapheUtilisateur);
                 }
             }
@@ -148,29 +148,29 @@ namespace psi_joséphine
         {
             switch (choix) 
             {
-                case "1": // Connexion
-                    ConnecterUtilisateur(ref utilisateurConnecte); // appelle la methode pour ...
+                case "1": 
+                    ConnecterUtilisateur(ref utilisateurConnecte);
                     break;
 
-                case "2": // Création de compte
+                case "2": 
                     CreerNouveauCompte();
                     break;
 
-                case "3": // Affichage du métro
+                case "3": 
                     afficheGraphe.AfficherGrapheDansConsole();
                     break;
 
-                case "4": // Affichage du graphe des utilisateurs
+                case "4": 
                     GrapheUtilisateur.AfficherGraphe();
                     break;
 
-                case "5": // Module Statistiques
+                case "5": 
                     AfficherMenuStatistiques();
                     break;
                 case "6":
                     AlgoWelshPowell();
                     break;
-                case "7": // Quitter
+                case "7": 
                     Console.WriteLine("Au revoir !");
                     Environment.Exit(0); 
                     break;
@@ -189,21 +189,21 @@ namespace psi_joséphine
 
         static void ConnecterUtilisateur(ref Personne utilisateurConnecte)
         {
-            // Demander les informations de connexion
+            
             Console.Write("Email: ");
             string email = Console.ReadLine();
             Console.Write("Mot de passe: ");
             string motDePasse = Console.ReadLine();
 
-            // Vérifier que les champs ne sont pas vides
+            
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(motDePasse))
             {
                 Console.WriteLine(" Email et mot de passe sont requis.");
                 return;
             }
 
-            // Tenter la connexion
-            try // tester du code qui pourrait produire une erreur
+            
+            try 
             {
                 utilisateurConnecte = BaseUtilisateur.AuthentifierUtilisateur(email, motDePasse);
                 if (utilisateurConnecte == null)
@@ -223,10 +223,10 @@ namespace psi_joséphine
 
         static void CreerNouveauCompte()
         {
-            // Créer un nouvel utilisateur
+          
             Personne nouvelUtilisateur = new Personne();
 
-            // Demander les informations
+          
             Console.Write("Prénom: ");
             nouvelUtilisateur.Prenom = Console.ReadLine();
             Console.Write("Nom: ");
@@ -242,7 +242,7 @@ namespace psi_joséphine
             Console.Write("Rôle (client/cuisinier/client_cuisinier): ");
             nouvelUtilisateur.Role = Console.ReadLine();
 
-            // Vérifier que les champs obligatoires sont remplis
+           
             bool champsValides = !string.IsNullOrEmpty(nouvelUtilisateur.Prenom) && !string.IsNullOrEmpty(nouvelUtilisateur.Nom) && !string.IsNullOrEmpty(nouvelUtilisateur.Email) &&
                                !string.IsNullOrEmpty(nouvelUtilisateur.MotDePasse) && !string.IsNullOrEmpty(nouvelUtilisateur.Role);
 
@@ -252,7 +252,7 @@ namespace psi_joséphine
                 return;
             }
 
-            // Créer le compte
+            
             try
             {
                 BaseUtilisateur.CreerUtilisateur(nouvelUtilisateur);
@@ -272,11 +272,11 @@ namespace psi_joséphine
 
             switch (choix)
             {
-                case "1": // Afficher les plats
+                case "1":
                     AfficherPlatsDisponibles();
                     break;
 
-                case "2": // Commander un plat ou voir commandes passées
+                case "2": 
                     if (estCuisinier)
                     {
                         AfficherCommandesUtilisateur(utilisateurConnecte);
@@ -287,7 +287,7 @@ namespace psi_joséphine
                     }
                     break;
 
-                case "3": // Voir commandes passées ou gérer commandes
+                case "3": 
                     if (estCuisinier)
                     {
                         GererCommandesCuisinier(utilisateurConnecte);
@@ -298,7 +298,7 @@ namespace psi_joséphine
                     }
                     break;
 
-                case "4": // Voir livraisons ou noter cuisinier
+                case "4": 
                     if (estCuisinier)
                     {
                         VoirLivraisonsCuisinier(utilisateurConnecte);
@@ -309,7 +309,7 @@ namespace psi_joséphine
                     }
                     break;
 
-                case "5": // Déconnexion pour client ou ajout plat pour cuisinier
+                case "5": 
                     if (estClient)
                     {
                         Deconnecter(ref utilisateurConnecte);
@@ -345,35 +345,34 @@ namespace psi_joséphine
 
         static void AfficherPlatsDisponibles()
         {
-            // Récupérer la liste des plats
+           
             List<Plat> plats = Personne.AfficherPlats();
 
-            // Vérifier s'il y a des plats disponibles
+            
             if (plats.Count == 0)
             {
                 Console.WriteLine("Aucun plat disponible.");
                 return;
             }
 
-            // Afficher les plats
+            
             Console.WriteLine("\nPlats disponibles:");
             foreach (Plat plat in plats)
             {
                 string infoPlat = plat.Id + " - " + plat.Nom;
-                infoPlat += " | Prix: " + plat.Prix + "euros"; // ajout du prix 
+                infoPlat += " | Prix: " + plat.Prix + "euros";  
                 infoPlat += " | Pour " + plat.NbDePersonne + " personne(s)";
-                Console.WriteLine(infoPlat); // affiche l'information complète pour chaque plat 
-            }
+                Console.WriteLine(infoPlat);             }
         }
 
         static void CommanderPlat(Personne utilisateur)
         {
-            // Afficher les plats disponibles appel de la methode
+            
             AfficherPlatsDisponibles();
 
-            // Demander l'ID du plat
+            
             Console.Write("\nID du plat à commander: ");
-            bool idValide = int.TryParse(Console.ReadLine(), out int idPlat); //convertir l'entrée de l'utilisateur (obtenue avec Console.ReadLine()) en un entier (idPlat
+            bool idValide = int.TryParse(Console.ReadLine(), out int idPlat); 
 
             if (idValide)
             {
@@ -383,10 +382,10 @@ namespace psi_joséphine
                     {
                         con.Open();
                         
-                        // Vérifier si le plat existe et obtenir son prix
+                        
                         var commandVerif = con.CreateCommand();
                         string requeteVerif = "SELECT prix, id_cuisinier FROM plat WHERE id = @idPlat";
-                        commandVerif.CommandText = requeteVerif; // affecte la requete à la commande 
+                        commandVerif.CommandText = requeteVerif;  
                         commandVerif.Parameters.AddWithValue("@idPlat", idPlat);
                         
                         using (var reader = commandVerif.ExecuteReader())
@@ -401,7 +400,7 @@ namespace psi_joséphine
                             int cuisinierId = Convert.ToInt32(reader["id_cuisinier"]);
                             reader.Close();
 
-                            // Créer la commande
+                            /// Créer la commande
                             var commandCommande = con.CreateCommand();
                             string requeteCommande = "INSERT INTO commande (client_id, cuisinier_id, statut, date_creation, total) " +
                                                    "VALUES (@clientId, @cuisinierId, 'En attente', NOW(), @total)";
@@ -411,10 +410,10 @@ namespace psi_joséphine
                             commandCommande.Parameters.AddWithValue("@total", prixPlat);
                             commandCommande.ExecuteNonQuery();
                             
-                            // Récupérer l'ID de la commande créée
+                           
                             long commandeId = commandCommande.LastInsertedId;
 
-                            // Ajouter la ligne de commande
+                            
                             var commandLigne = con.CreateCommand();
                             string requeteLigne = "INSERT INTO lignecommande (commande_id, plat_id, quantite, date_livraison, lieu_livraison) " +
                                                 "VALUES (@commandeId, @platId, 1, DATE_ADD(NOW(), INTERVAL 1 HOUR), @lieuLivraison)";
@@ -454,14 +453,14 @@ namespace psi_joséphine
 
                     var reader = command.ExecuteReader();
                     Console.WriteLine("\nVos commandes:");
-                    int commandeIdPrecedent = -1; // permet de detecter quand on passe une nouvelle commande =-1 car on est sur qu'aucune commande aura un Id négatif 
+                    int commandeIdPrecedent = -1; 
                     decimal totalCommande = 0;
 
                     while (reader.Read())
                     {
                         int commandeId = Convert.ToInt32(reader["id"]);
                         
-                        if (commandeId != commandeIdPrecedent) // nouvelle commande rencontrée 
+                        if (commandeId != commandeIdPrecedent) 
                         {
                             if (commandeIdPrecedent != -1)
                             {
@@ -476,7 +475,7 @@ namespace psi_joséphine
                             commandeIdPrecedent = commandeId;
                         }
 
-                        if (!reader.IsDBNull(reader.GetOrdinal("nom_plat"))) // Vérifie qu’il y a bien un plat lié à la ligne (ce n’est pas juste une commande vide).
+                        if (!reader.IsDBNull(reader.GetOrdinal("nom_plat"))) 
                         {
                             string nomPlat = reader["nom_plat"].ToString();
                             decimal prixPlat = Convert.ToDecimal(reader["prix_plat"]);
@@ -612,14 +611,14 @@ namespace psi_joséphine
                 {
                     con.Open();
                     var command = con.CreateCommand();
-                    string requete = "SELECT AVG(total) as moyenne_prix " +"FROM commande " + "WHERE statut != 'Annulé'"; //  ignore les commandes qui ont été annulées.
+                    string requete = "SELECT AVG(total) as moyenne_prix " +"FROM commande " + "WHERE statut != 'Annulé'"; 
                     command.CommandText = requete;
 
                     var reader = command.ExecuteReader();
                     if (reader.Read())
                     {
-                        decimal moyennePrix = reader["moyenne_prix"] == DBNull.Value ? 0 : Convert.ToDecimal(reader["moyenne_prix"]); // vérifie si aucune commande existe -> moyenne =0
-                        Console.WriteLine($"\nMoyenne des prix des commandes: {moyennePrix:F2}euros"); // F2 : formate le résultat avec 2 chiffres après la virgule 
+                        decimal moyennePrix = reader["moyenne_prix"] == DBNull.Value ? 0 : Convert.ToDecimal(reader["moyenne_prix"]); 
+                        Console.WriteLine($"\nMoyenne des prix des commandes: {moyennePrix:F2}euros"); 
                     }
                 }
             }
@@ -666,7 +665,7 @@ namespace psi_joséphine
         {
             try
             {
-                // Afficher les commandes livrées de l'utilisateur
+                
                 using (var con = new MySql.Data.MySqlClient.MySqlConnection(BaseUtilisateur.connexionString))
                 {
                     con.Open();
@@ -678,7 +677,7 @@ namespace psi_joséphine
 
                     var reader = command.ExecuteReader();
                     Console.WriteLine("\nVos commandes livrées:");
-                    bool hasCommands = false; // Une variable hasCommands est initialisée à false pour vérifier s'il existe des commandes livrées.
+                    bool hasCommands = false; 
                     while (reader.Read())
                     {
                         hasCommands = true;
@@ -688,12 +687,12 @@ namespace psi_joséphine
                     if (!hasCommands)
                     {
                         Console.WriteLine("Vous n'avez aucune commande livrée à noter.");
-                        return; // le return arrête l'exécution de la méthode
+                        return; 
                     }
 
                     reader.Close();
 
-                    // Demander l'ID de la commande à noter
+                    
                     Console.Write("\nID de la commande à noter: ");
                     if (!int.TryParse(Console.ReadLine(), out int commandeId))
                     {
@@ -701,7 +700,7 @@ namespace psi_joséphine
                         return;
                     }
 
-                    // Vérifier si la commande existe, appartient à l'utilisateur et est livrée
+                    
                     command = con.CreateCommand();
                     requete = "SELECT c.id, u.prenom, u.nom " + "FROM commande c " + "JOIN utilisateurs u ON c.cuisinier_id = u.id " +
                              "WHERE c.id = @commandeId AND c.client_id = @userId AND c.statut = 'Livré'";
@@ -719,7 +718,7 @@ namespace psi_joséphine
                     string cuisinierNom = $"{reader["prenom"]} {reader["nom"]}";
                     reader.Close();
 
-                    // Vérifier si une note existe déjà pour cette commande
+                  
                     command = con.CreateCommand();
                     requete = "SELECT id_note FROM Notes WHERE commande_id = @commandeId";
                     command.CommandText = requete;
@@ -732,7 +731,7 @@ namespace psi_joséphine
                     }
                     reader.Close();
 
-                    // Demander la note
+                  
                     Console.Write($"Note pour {cuisinierNom} (1-5): ");
                     if (!int.TryParse(Console.ReadLine(), out int note) || note < 1 || note > 5)
                     {
@@ -740,11 +739,11 @@ namespace psi_joséphine
                         return;
                     }
 
-                    // Demander le commentaire
+                    
                     Console.Write("Commentaire (optionnel): ");
                     string commentaire = Console.ReadLine();
 
-                    // Insérer la note dans la base de données
+               
                     command = con.CreateCommand();
                     requete = "INSERT INTO Notes (commentaire_note, date_avis, note_retour, commande_id) " + "VALUES (@commentaire, NOW(), @note, @commandeId)"; // La date de l'avis est automatiquement définie avec NOW()
                     command.CommandText = requete;
@@ -792,7 +791,7 @@ namespace psi_joséphine
 
                     reader.Close();
 
-                    // Demander l'ID de la commande à modifier
+                   
                     Console.Write("\nID de la commande à modifier: ");
                     if (!int.TryParse(Console.ReadLine(), out int commandeId))
                     {
@@ -800,7 +799,7 @@ namespace psi_joséphine
                         return;
                     }
 
-                    // Vérifier si la commande existe et appartient au cuisinier
+                
                     command = con.CreateCommand();
                     requete = "SELECT c.id, c.statut, u.adresse as adresse_client " +"FROM commande c " +
                              "JOIN utilisateurs u ON c.client_id = u.id " + "WHERE c.id = @commandeId AND c.cuisinier_id = @cuisinierId"; // la commande doit correspondre à l'id de la commande et à l'id du cuisinier 
@@ -820,14 +819,14 @@ namespace psi_joséphine
                     string adresseClient = reader["adresse_client"].ToString();
                     reader.Close();
 
-                    // Afficher les statuts possibles
+                   
                     Console.WriteLine("\nStatuts possibles:");
                     Console.WriteLine("1. En attente");
                     Console.WriteLine("2. En cours");
                     Console.WriteLine("3. Livré");
                     Console.WriteLine("4. Annulé");
 
-                    // Demander le nouveau statut
+                    
                     Console.Write("Nouveau statut (1-4): ");
                     if (!int.TryParse(Console.ReadLine(), out int choixStatut) || choixStatut < 1 || choixStatut > 4)
                     {
@@ -835,7 +834,7 @@ namespace psi_joséphine
                         return;
                     }
 
-                    string nouveauStatut = choixStatut switch // Le switch permet de définir le nouveau statut de la commande en fonction du choix de l'utilisateur
+                    string nouveauStatut = choixStatut switch 
                     {
                         1 => "En attente",
                         2 => "En cours",
@@ -844,18 +843,18 @@ namespace psi_joséphine
                         _ => statutActuel
                     };
 
-                    // Mettre à jour le statut
+                    
                     command = con.CreateCommand();
-                    requete = "UPDATE commande SET statut = @statut WHERE id = @commandeId"; // requête UPDATE est exécutée pour mettre à jour le statut de la commande dans la base de données
+                    requete = "UPDATE commande SET statut = @statut WHERE id = @commandeId"; 
                     command.CommandText = requete;
                     command.Parameters.AddWithValue("@statut", nouveauStatut);
                     command.Parameters.AddWithValue("@commandeId", commandeId);
                     command.ExecuteNonQuery();
 
-                    // Si le statut passe à "En cours", créer une livraison
+                    /// Si le statut passe à "En cours", créer une livraison
                     if (nouveauStatut == "En cours" && statutActuel != "En cours")
                     {
-                        // Récupérer l'adresse du cuisinier
+                       
                         command = con.CreateCommand();
                         requete = "SELECT adresse FROM utilisateurs WHERE id = @cuisinierId";
                         command.CommandText = requete;
@@ -865,7 +864,7 @@ namespace psi_joséphine
                         string adresseCuisinier = reader["adresse"].ToString();
                         reader.Close();
 
-                        // Créer la livraison
+                      
                         command = con.CreateCommand();
                         requete = "INSERT INTO livraison (adresse_depart, adresse_arrivee, date_livraison, statut_livraison, heure_disponible, zone_geographique, cuisinier_id) " +
                                  "VALUES (@adresseDepart, @adresseArrivee, NOW(), 'En attente', TIME(NOW()), 'Paris', @cuisinierId)"; // insert : creer une nouvelle ligne de commande 
@@ -875,10 +874,10 @@ namespace psi_joséphine
                         command.Parameters.AddWithValue("@cuisinierId", cuisinier.Id);
                         command.ExecuteNonQuery();
 
-                        // Récupérer l'ID de la livraison créée
+                        
                         long livraisonId = command.LastInsertedId;
 
-                        // Mettre à jour la ligne de commande avec l'ID de la livraison
+                      
                         command = con.CreateCommand();
                         requete = "UPDATE lignecommande SET livraison_id = @livraisonId WHERE commande_id = @commandeId";
                         command.CommandText = requete;

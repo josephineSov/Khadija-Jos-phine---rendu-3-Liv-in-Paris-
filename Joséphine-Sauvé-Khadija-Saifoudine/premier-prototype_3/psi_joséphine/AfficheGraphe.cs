@@ -10,7 +10,7 @@ using System.Runtime.Versioning;
 
 namespace psi_joséphine
 {
-    [SupportedOSPlatform("windows")] // morceau de code est uniquement pris en charge sur windows
+    [SupportedOSPlatform("windows")]
     public class AfficheGraphe
     {
         private List<Noeud> noeuds;
@@ -21,9 +21,9 @@ namespace psi_joséphine
         private const string CHEMIN_IMAGE = "carte_metro_PARIS.png";
 
 
-        public AfficheGraphe(List<Noeud> noeuds, List<Lien> liens) // constructeur 
+        public AfficheGraphe(List<Noeud> noeuds, List<Lien> liens) 
         {
-            this.noeuds = noeuds ?? new List<Noeud>(); // ?? renvoie la valeur de gauche si liste pas null sinon celle de droite 
+            this.noeuds = noeuds ?? new List<Noeud>();  
             this.liens = liens ?? new List<Lien>();
             InitialiserCouleurs();
         }
@@ -63,12 +63,12 @@ namespace psi_joséphine
                 Console.WriteLine("\n - Carte du Métro de Paris - ");
                 Console.WriteLine($"L'image de la carte se trouve dans le fichier bin - Debug - net6.0-windows : {CHEMIN_IMAGE}");
                 Console.WriteLine("\nAppuyer pour continuer");
-                Console.ReadKey(); // attendre que l'utilisateur appuie sur une touche pour continuer execution du programme 
+                Console.ReadKey(); 
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Erreur : {ex.Message}");
-                Console.WriteLine($"Détails de l'erreur : {ex.StackTrace}"); // afficher la liste d'erreur jusqu'a ce que l'erreur se produise 
+                Console.WriteLine($"Détails de l'erreur : {ex.StackTrace}"); 
             }
         }
 
