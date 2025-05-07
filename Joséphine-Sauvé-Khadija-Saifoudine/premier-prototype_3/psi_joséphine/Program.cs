@@ -551,7 +551,7 @@ namespace psi_joséphine
                     con.Open();
                     var command = con.CreateCommand();
                     string requete = "SELECT u.prenom, u.nom, COUNT(l.id_livraison) as nombre_livraisons " + "FROM utilisateurs u " + "LEFT JOIN livraison l ON u.id = l.cuisinier_id " +
-                                   "WHERE u.role IN ('cuisinier', 'client_cuisinier') " +  "GROUP BY u.id, u.prenom, u.nom " + "ORDER BY nombre_livraisons DESC"; //  nombre de livraisons faites par chaque cuisinier
+                                   "WHERE u.role IN ('cuisinier', 'client_cuisinier') " +  "GROUP BY u.id, u.prenom, u.nom " + "ORDER BY nombre_livraisons DESC"; 
                     command.CommandText = requete;
 
                     var reader = command.ExecuteReader();
@@ -834,16 +834,28 @@ namespace psi_joséphine
                         return;
                     }
 
-                    string nouveauStatut = choixStatut switch 
-                    {
-                        1 => "En attente",
-                        2 => "En cours",
-                        3 => "Livré",
-                        4 => "Annulé",
-                        _ => statutActuel
-                    };
 
-                    
+                    string nouveauStatut;
+                    switch (choixStatut)
+                    {
+                        case 1:
+                            nouveauStatut = "En attente";
+                            break;
+                        case 2:
+                            nouveauStatut = "En cours";
+                            break;
+                        case 3:
+                            nouveauStatut = "Livré";
+                            break;
+                        case 4:
+                            nouveauStatut = "Annulé";
+                            break;
+                        default:
+                            nouveauStatut = statutActuel;
+                            break;
+                    }
+
+
                     command = con.CreateCommand();
                     requete = "UPDATE commande SET statut = @statut WHERE id = @commandeId"; 
                     command.CommandText = requete;

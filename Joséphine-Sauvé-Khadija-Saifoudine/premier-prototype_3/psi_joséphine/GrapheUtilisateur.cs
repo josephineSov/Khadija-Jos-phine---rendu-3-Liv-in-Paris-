@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using MySql.Data.MySqlClient;
 using System.Linq;
+//using System.Xml.Linq;
 
 namespace psi_joséphine
 {
@@ -319,7 +320,24 @@ namespace psi_joséphine
             }
 
         }
+/*// Exporter les résultats dans un fichier XML
+XDocument doc = new XDocument(
+    new XElement("ColorationWelshPowell",
+        from p in utilisateurs
+        where couleurs.ContainsKey(p.Id)
+        select new XElement("Utilisateur",
+            new XElement("ID", p.Id),
+            new XElement("NomComplet", p.GetNomComplet()),
+            new XElement("Couleur", couleurs[p.Id])
+        )
+    )
+);
 
+// Sauvegarde dans un fichier
+string cheminFichier = "coloration_resultat.xml";
+doc.Save(cheminFichier);
+Console.WriteLine($"Résultats exportés dans le fichier : {cheminFichier}");
+*/
 
     }
 } 
