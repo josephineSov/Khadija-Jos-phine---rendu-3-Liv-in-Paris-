@@ -10,20 +10,20 @@ using System.Runtime.Versioning;
 
 namespace psi_joséphine
 {
-    [SupportedOSPlatform("windows")]
+    [SupportedOSPlatform("windows")] // morceau de code est uniquement pris en charge sur windows
     public class AfficheGraphe
     {
         private List<Noeud> noeuds;
         private List<Lien> liens;
         private Dictionary<string, Color> couleursLignes;
-        private const int TAILLE_STATION = 4;
-        private const int EPAISSEUR_LIGNE = 2;
+        private const int TAILLE_STATION = 6;
+        private const int EPAISSEUR_LIGNE = 3;
         private const string CHEMIN_IMAGE = "carte_metro_PARIS.png";
 
 
-        public AfficheGraphe(List<Noeud> noeuds, List<Lien> liens)
+        public AfficheGraphe(List<Noeud> noeuds, List<Lien> liens) // constructeur 
         {
-            this.noeuds = noeuds ?? new List<Noeud>();
+            this.noeuds = noeuds ?? new List<Noeud>(); // ?? renvoie la valeur de gauche si liste pas null sinon celle de droite 
             this.liens = liens ?? new List<Lien>();
             InitialiserCouleurs();
         }
@@ -33,22 +33,22 @@ namespace psi_joséphine
             couleursLignes = new Dictionary<string, Color>
             {
 
-        {"1", Color.FromArgb(255, 255, 200, 0)},      // Orange vif (plus chaud)
-        {"2", Color.FromArgb(255, 0, 102, 204)},      // Bleu roi (plus lisible)
-        {"3", Color.FromArgb(255, 178, 153, 0)},      // Ocre jaune / Olive foncé
-        {"3bis", Color.FromArgb(255, 100, 190, 255)}, // Bleu ciel doux
-        {"4", Color.FromArgb(255, 170, 50, 140)},     // Violet soutenu
-        {"5", Color.FromArgb(255, 255, 120, 0)},      // Orange moyen
-        {"6", Color.FromArgb(255, 140, 200, 100)},    // Vert doux
-        {"7", Color.FromArgb(255, 255, 140, 170)},    // Rose clair
-        {"7bis", Color.FromArgb(255, 255, 182, 193)}, // Rose pastel
-        {"8", Color.FromArgb(255, 145, 70, 155)},     // Violet moyen
-        {"9", Color.FromArgb(255, 200, 210, 60)},     // Vert anis
-        {"10", Color.FromArgb(255, 240, 190, 0)},     // Or lumineux
-        {"11", Color.FromArgb(255, 120, 60, 20)},     // Marron foncé
-        {"12", Color.FromArgb(255, 0, 130, 60)},      // Vert forêt
-        {"13", Color.FromArgb(255, 170, 255, 170)},   // Vert menthe pâle
-        {"14", Color.FromArgb(255, 100, 0, 100)}      // Violet foncé intense
+    { "1", Color.FromArgb(255, 255, 205, 0) },
+    { "2", Color.FromArgb(255, 0, 60, 166) },
+    { "3", Color.FromArgb(255, 131, 121, 2) },
+    { "3bis", Color.FromArgb(255, 110, 196, 232) },
+    { "4", Color.FromArgb(255, 207, 0, 158) },
+    { "5", Color.FromArgb(255, 255, 126, 46) },
+    { "6", Color.FromArgb(255, 110, 202, 151) },
+    { "7", Color.FromArgb(255, 250, 154, 186) },
+    { "7bis", Color.FromArgb(255, 110, 196, 232) },
+    { "8", Color.FromArgb(255, 225, 155, 223) },
+    { "9", Color.FromArgb(255, 182, 189, 0) },
+    { "10", Color.FromArgb(255, 201, 145, 13) },
+    { "11", Color.FromArgb(255, 112, 75, 28) },
+    { "12", Color.FromArgb(255, 0, 120, 82) },
+    { "13", Color.FromArgb(255, 110, 202, 151) },
+    { "14", Color.FromArgb(255, 98, 37, 157) }
             };
         }
 
@@ -63,19 +63,19 @@ namespace psi_joséphine
                 Console.WriteLine("\n - Carte du Métro de Paris - ");
                 Console.WriteLine($"L'image de la carte se trouve dans le fichier bin - Debug - net6.0-windows : {CHEMIN_IMAGE}");
                 Console.WriteLine("\nAppuyer pour continuer");
-                Console.ReadKey();
+                Console.ReadKey(); // attendre que l'utilisateur appuie sur une touche pour continuer execution du programme 
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Erreur : {ex.Message}");
-                Console.WriteLine($"Détails de l'erreur : {ex.StackTrace}");
+                Console.WriteLine($"Détails de l'erreur : {ex.StackTrace}"); // afficher la liste d'erreur jusqu'a ce que l'erreur se produise 
             }
         }
 
         private void DessinerGraphe()
         {
-            int largeur = 1500;
-            int hauteur = 1000;
+            int largeur = 1750;
+            int hauteur = 1300;
 
             double minLat = noeuds.Min(n => n.Lat);
             double maxLat = noeuds.Max(n => n.Lat);
@@ -87,8 +87,9 @@ namespace psi_joséphine
             {
                 g.Clear(Color.White);
                 g.SmoothingMode = SmoothingMode.AntiAlias;
+                
 
-                // Dessiner les liens (lignes de métro)
+                /// Dessiner les liens (lignes de métro)
                 foreach (var lien in liens)
                 {
                     int x1 = (int)((lien.source.Lon - minLon) / (maxLon - minLon) * (largeur - 200) + 100);
@@ -105,7 +106,7 @@ namespace psi_joséphine
                     }
                 }
 
-                // Dessiner les stations
+                /// Dessiner les stations
                 foreach (var noeud in noeuds)
                 {
                     int x = (int)((noeud.Lon - minLon) / (maxLon - minLon) * (largeur - 200) + 100);
@@ -121,7 +122,7 @@ namespace psi_joséphine
                     }
                 }
 
-                // Titre centré en haut
+                
                 using (Font fontTitre = new Font("Arial", 24, FontStyle.Bold))
                 using (Brush pinceauTitre = new SolidBrush(Color.Black))
                 {
@@ -131,7 +132,7 @@ namespace psi_joséphine
                     g.DrawString(titre, fontTitre, pinceauTitre, xTitre, 10);
                 }
 
-                // Sauvegarder l'image
+                
                 image.Save(CHEMIN_IMAGE, ImageFormat.Png);
             }
         }

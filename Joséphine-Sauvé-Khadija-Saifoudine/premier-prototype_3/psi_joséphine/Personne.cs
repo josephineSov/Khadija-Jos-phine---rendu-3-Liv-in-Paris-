@@ -27,7 +27,7 @@ namespace psi_joséphine
             return GetNomComplet() + " (" + Role + ")";
         }
 
-        // Méthodes pour les opérations sur les plats
+       
         public static List<Plat> AfficherPlats()
         {
             List<Plat> plats = new List<Plat>();
@@ -68,7 +68,7 @@ namespace psi_joséphine
             }
         }
 
-        // Méthodes pour les opérations sur les commandes
+       
         public static void CreerCommande(int clientId, int cuisinierId)
         {
             using (var con = new MySqlConnection(connexionString))

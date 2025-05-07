@@ -21,18 +21,16 @@ namespace psi_joséphine
         {
             try
             {
-                Bitmap bitmap = new Bitmap(IMAGE_WIDTH, IMAGE_HEIGHT); //  zone de dessin en mémoire.
-                Graphics graphics = Graphics.FromImage(bitmap); // objet utilisé pour toutes les opérations de dessin sur ce bitmap.
+                Bitmap bitmap = new Bitmap(IMAGE_WIDTH, IMAGE_HEIGHT); 
+                Graphics graphics = Graphics.FromImage(bitmap); 
 
-                // Remplir le fond en blanc
+         
                 graphics.Clear(Color.White);
 
-                // Activer l'antialiasing pour un meilleur rendu
-                // graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
                 DessinerGraphe(graphics, IMAGE_WIDTH, IMAGE_HEIGHT);
 
-                // Sauvegarder l'image
+                
                 bitmap.Save("graphe_clients_cuisiniers.png", ImageFormat.Png);
                 Console.WriteLine("Le graphe a été sauvegardé dans bin");
 
@@ -48,12 +46,12 @@ namespace psi_joséphine
 
         private static void DessinerGraphe(Graphics g, int width, int height)
         {
-            List<Personne> utilisateurs = GetUtilisateurs(); //appelle votre couche d’accès aux données pour charger tous les utilisateurs
+            List<Personne> utilisateurs = GetUtilisateurs(); //appelle votre touche d’accès aux données pour charger tous les utilisateurs
             List<Commande> commandes = GetCommandes(); // charge toutes les commandes passées.
 
 
             // Séparer les cuisiniers et les clients
-            List<Personne> cuisiniers = new List<Personne>(); // cuisiniers pour stocker tous ceux dont le rôle inclut la préparation
+            List<Personne> cuisiniers = new List<Personne>();
             List<Personne> clients = new List<Personne>(); 
 
             // Trier les utilisateurs entre cuisiniers et clients
@@ -94,15 +92,15 @@ namespace psi_joséphine
                 }
             }
 
-            // Dessiner les arcs (commandes) en premier
+            /// Dessiner les arcs (commandes)
             foreach (Commande commande in commandes)
             {
-                if (positions.ContainsKey(commande.ClientId) && positions.ContainsKey(commande.CuisinierId))
+                if (positions.ContainsKey(commande.ClientId) && positions.ContainsKey(commande.CuisinierId)) // vérifie si le dictionnaire contient les positions des c et c 
                 {
                     Point startPoint = positions[commande.ClientId];
                     Point endPoint = positions[commande.CuisinierId];
 
-                    // Dessiner une flèche verte avec un contour noir
+                  
                     Pen pen = new Pen(Color.Black, 2);
                     pen.CustomEndCap = new System.Drawing.Drawing2D.AdjustableArrowCap(5, 5);
                     g.DrawLine(pen, startPoint.X, startPoint.Y, endPoint.X, endPoint.Y);
@@ -110,7 +108,7 @@ namespace psi_joséphine
                 }
             }
 
-            // Dessiner les nœuds
+            /// Dessiner les nœuds
             foreach (Personne utilisateur in utilisateurs)
             {
                 if (positions.ContainsKey(utilisateur.Id))
@@ -118,7 +116,7 @@ namespace psi_joséphine
                     Point position = positions[utilisateur.Id];
                     Brush brush;
                     
-                    // Choisir la couleur selon le rôle
+                    
                     if (utilisateur.Role == "cuisinier" || utilisateur.Role == "client_cuisinier")
                     {
                         brush = Brushes.Green;
@@ -128,13 +126,13 @@ namespace psi_joséphine
                         brush = Brushes.Orange;
                     }
 
-                    // Dessiner le cercle avec un contour noir
+                    
                     g.FillEllipse(brush, position.X - NODE_RADIUS, position.Y - NODE_RADIUS, NODE_RADIUS * 2, NODE_RADIUS * 2);
                     g.DrawEllipse(Pens.Black, position.X - NODE_RADIUS, position.Y - NODE_RADIUS, NODE_RADIUS * 2, NODE_RADIUS * 2);
 
                     // Dessiner le nom avec un fond blanc
                     string nom = utilisateur.GetNomComplet();
-                    Font font = new Font("Arial", 8);
+                    Font font = new Font("Arial", 12);
                     SizeF size = g.MeasureString(nom, font);
                     g.FillRectangle(Brushes.White, position.X - size.Width/2, position.Y + NODE_RADIUS, size.Width, size.Height);
                    g.DrawString(nom, font, Brushes.Black, position.X - size.Width/2, position.Y + NODE_RADIUS);
@@ -142,12 +140,9 @@ namespace psi_joséphine
                 }
             }
 
-            // Dessiner la légende
-            int legendY = height - LEGEND_HEIGHT;
-            //g.FillRectangle(Brushes.White, 0, legendY, width, LEGEND_HEIGHT);
             
-            // Dessiner les éléments de la légende
-            Font legendFont = new Font("Arial", 10);
+            int legendY = height - LEGEND_HEIGHT;
+            Font legendFont = new Font("Arial", 15);
             
             g.FillEllipse(Brushes.Green, 10, legendY + 5, 15, 15);
             g.DrawString("Cuisiniers", legendFont, Brushes.Black, 30, legendY + 5);
@@ -159,7 +154,7 @@ namespace psi_joséphine
             g.DrawLine(legendPen, 300, legendY + 12, 350, legendY + 12);
             g.DrawString("Commandes", legendFont, Brushes.Black, 360, legendY + 5);
             
-            // Libérer les ressources
+           
             legendFont.Dispose();
             legendPen.Dispose();
         }
@@ -286,7 +281,7 @@ namespace psi_joséphine
             {
                 int idCourant = sommetsTries[i];
 
-                if (!couleurs.ContainsKey(idCourant)) // si pas deja coloré 
+                if (!couleurs.ContainsKey(idCourant)) 
                 {
                     couleurs[idCourant] = couleur;
 
@@ -324,5 +319,7 @@ namespace psi_joséphine
             }
 
         }
+
+
     }
 } 

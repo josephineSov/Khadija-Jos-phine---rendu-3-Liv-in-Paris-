@@ -53,10 +53,10 @@ namespace psi_joséphine
 
         static void AfficherMenu(Personne utilisateur)
         {
-            // Ajouter une ligne vide pour la lisibilité
+            
             Console.WriteLine();
 
-            // Menu pour utilisateur non connecté
+            /// Menu pour utilisateur non connecté
             if (utilisateur == null)
             {
                 Console.WriteLine("- Menu Principal -");
@@ -68,7 +68,7 @@ namespace psi_joséphine
                 Console.WriteLine("6. Algo WelshPowell");
                 Console.WriteLine("7. Quitter");
             }
-            // Menu pour utilisateur connecté
+            /// Menu pour utilisateur connecté
             else
             {
                 Console.WriteLine(" - Menu Utilisateur -");
@@ -78,7 +78,7 @@ namespace psi_joséphine
                 
                 if (estCuisinier)
                 {
-                    // Menu pour cuisinier
+                    
                     Console.WriteLine("1. Afficher les plats disponibles");
                     Console.WriteLine("2. Voir commandes passées");
                     Console.WriteLine("3. Gérer mes commandes");
@@ -88,7 +88,7 @@ namespace psi_joséphine
                 }
                 else
                 {
-                    // Menu pour client
+                    
                     Console.WriteLine("1. Afficher les plats disponibles");
                     Console.WriteLine("2. Commander un plat");
                     Console.WriteLine("3. Voir commandes passées");
@@ -101,19 +101,19 @@ namespace psi_joséphine
 
         static void AjouterPlat(Personne cuisinier)
         {
-            Console.WriteLine("\n=== Ajouter un nouveau plat ===");
+            Console.WriteLine("\n - Ajouter un nouveau plat - ");
 
-            // Créer un nouveau plat
+            
             Plat nouveauPlat = new Plat();
 
-            // Demander les informations du plat
+            
             Console.Write("Nom du plat: ");
             nouveauPlat.Nom = Console.ReadLine();
 
             Console.Write("Prix (en euros): ");
             if (!decimal.TryParse(Console.ReadLine(), out decimal prix))
             {
-                Console.WriteLine("Prix invalide. Veuillez entrer un nombre valide.");
+                Console.WriteLine("Prix invalide. Veuillez entrer un nombre valide");
                 return;
             }
             nouveauPlat.Prix = prix;
@@ -121,12 +121,12 @@ namespace psi_joséphine
             Console.Write("Nombre de personnes: ");
             if (!int.TryParse(Console.ReadLine(), out int nbPersonnes))
             {
-                Console.WriteLine("Nombre de personnes invalide. Veuillez entrer un nombre entier valide.");
+                Console.WriteLine("Nombre de personnes invalide. Veuillez entrer un nombre entier valide");
                 return;
             }
             nouveauPlat.NbDePersonne = nbPersonnes;
 
-            // Vérifier que les champs obligatoires sont remplis
+            
             if (string.IsNullOrEmpty(nouveauPlat.Nom))
             {
                 Console.WriteLine("Le nom du plat est requis.");
@@ -135,7 +135,7 @@ namespace psi_joséphine
 
             try
             {
-                // Ajouter le plat à la base de données
+                
                 Personne.AjouterPlat(nouveauPlat, cuisinier.Id);
                 Console.WriteLine("Plat ajouté avec succès !");
             }
@@ -146,7 +146,7 @@ namespace psi_joséphine
         }
         static void GererMenuNonConnecte(string choix, ref Personne utilisateurConnecte, AfficheGraphe afficheGraphe)
         {
-            switch (choix) // execute une action différente selon la valeur du choix 
+            switch (choix) 
             {
                 case "1": // Connexion
                     ConnecterUtilisateur(ref utilisateurConnecte); // appelle la methode pour ...
@@ -172,7 +172,7 @@ namespace psi_joséphine
                     break;
                 case "7": // Quitter
                     Console.WriteLine("Au revoir !");
-                    Environment.Exit(0); // une méthode statique qui termine immédiatement le processus en cours - 0 -> succes 
+                    Environment.Exit(0); 
                     break;
 
                 default:
@@ -215,9 +215,9 @@ namespace psi_joséphine
                     Console.WriteLine(" Connexion réussie !");
                 }
             }
-            catch (Exception ex) //  attrape toute exception (erreur inattendue) survenue dans le bloc try 
+            catch (Exception ex) 
             {
-                Console.WriteLine(" Erreur: " + ex.Message); // affiche un message d’erreur avec le contenu exact de l’exception
+                Console.WriteLine(" Erreur: " + ex.Message); 
             }
         }
 
@@ -373,7 +373,7 @@ namespace psi_joséphine
 
             // Demander l'ID du plat
             Console.Write("\nID du plat à commander: ");
-            bool idValide = int.TryParse(Console.ReadLine(), out int idPlat); //onvertir l'entrée de l'utilisateur (obtenue avec Console.ReadLine()) en un entier (idPlat
+            bool idValide = int.TryParse(Console.ReadLine(), out int idPlat); //convertir l'entrée de l'utilisateur (obtenue avec Console.ReadLine()) en un entier (idPlat
 
             if (idValide)
             {
@@ -482,7 +482,7 @@ namespace psi_joséphine
                             decimal prixPlat = Convert.ToDecimal(reader["prix_plat"]);
                             int quantite = Convert.ToInt32(reader["quantite"]);
                             totalCommande += prixPlat * quantite;
-                            Console.WriteLine($"  • {nomPlat} x{quantite} ({prixPlat}euros/unité)");
+                            Console.WriteLine($"  {nomPlat} x{quantite} ({prixPlat}euros/unité)");
                         }
                     }
 

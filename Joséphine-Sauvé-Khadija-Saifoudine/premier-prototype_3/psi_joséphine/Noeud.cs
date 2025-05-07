@@ -18,7 +18,7 @@ namespace psi_joséphine
         double lat;
         int identifiant;
         bool doublesens;
-        List<string> listeligne; // liste des lignes passant par cette station
+        List<string> listeligne; 
         int couleur;
 
 

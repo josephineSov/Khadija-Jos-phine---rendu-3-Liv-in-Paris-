@@ -10,7 +10,6 @@ using System.IO;
 
 namespace psi_joséphine
 
-// new 
 {
     internal class AlgoRecherches
     {
@@ -21,9 +20,7 @@ namespace psi_joséphine
         public List<Noeud> stationsExcel;
         public Dictionary<Noeud, List<Lien>> Graph;
         public double[,] matPonderee;
-        //public int[,] mat;
-        //public double[,] matFloyd;
-        //public double[] matBellman;
+
         public AlgoRecherches()
         {
             string filePath = "MetroParis.xlsx";
@@ -76,7 +73,7 @@ namespace psi_joséphine
 
         public int MinDistance(double[] distances, bool[] visited)
         {
-            int n = matPonderee.GetLength(0);
+            int n = matPonderee.GetLength(0); // initialise n à la taille de la matrice ponderée 
             double min = double.MaxValue;
             int minIndex = -1;
 
@@ -90,11 +87,6 @@ namespace psi_joséphine
             }
             return minIndex;
         }
-
-
-        
-        
-
 
         public void Dijkstra(int source, int destination)
         {
@@ -150,7 +142,7 @@ namespace psi_joséphine
             Console.WriteLine($"Chemin le plus court de {stations[depart].Nom} à {stations[arrivee].Nom}");
             foreach (var station in trajet)
             {
-                Console.WriteLine(" -> " + stations[station].Nom + "   Vous êtes sur la ligne : " + stations[station].Ligne);
+                Console.WriteLine(" - " + stations[station].Nom + "   La station se trouve sur la ligne : " + stations[station].Ligne);
             }
             Console.WriteLine();
             Console.WriteLine($"Temps total : {tempsTrajet[arrivee]} minutes");

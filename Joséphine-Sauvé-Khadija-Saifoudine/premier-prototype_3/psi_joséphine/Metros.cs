@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
+﻿
+using DocumentFormat.OpenXml.Bibliography;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.CRUD;
 using OfficeOpenXml;
@@ -86,41 +87,6 @@ namespace psi_joséphine
 
 
 
-        public int[,] CreerMatriceAdjacence()
-        {
-            var graph = Graph;
-            var noeuds = graph.Keys.ToList();
-            int n = noeuds.Count;
-            int[,] matriceAdjacence = new int[n, n];
-
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < n; j++)
-                {
-                    if (i != j)
-                    {
-                        foreach (var lien in graph[noeuds[i]])
-                        {
-                            if (lien.Destination == noeuds[j])
-                            {
-                                matriceAdjacence[i, j] = 1;
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-            return matriceAdjacence;
-        }
-
-        public void Matrice()
-        {
-            this.mat = CreerMatriceAdjacence();
-        }
-
-
-
-
         public void CreationLien()
         {
             Dictionary<string, List<Noeud>> stationsParLigne = new Dictionary<string, List<Noeud>>();
@@ -172,86 +138,6 @@ namespace psi_joséphine
                     }
                 }
             }
-        }
-
-
-        public void RemplirGraph()
-        {
-            foreach (var lien in liens)
-            {
-                if (lien.Source == null)
-                {
-                    Console.WriteLine("Un lien contient une source null !");
-                }
-
-                if (!Graph.ContainsKey(lien.Source))
-                {
-                    Graph[lien.Source] = new List<Lien>();
-                }
-                Graph[lien.Source].Add(lien);
-            }
-        }
-
-        public void PopulateDatabase()
-        {
-            string connectionString = "SERVER=127.0.0.1;PORT=3306;" + "DATABASE=psi_LivinParis;" + "UID=root;PASSWORD=Root";
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                conn.Open();
-
-
-                foreach (var station in stations)
-                {
-                    string lignesString = string.Join(",", station.ListeLigne);
-
-                    string query = "INSERT INTO stations_metro (id, nom, longitude, latitude, ligne, listeligne) VALUES (@id, @nom, @longitude, @latitude, @ligne, @listeligne) " + "ON DUPLICATE KEY UPDATE nom=@nom, longitude=@longitude, latitude=@latitude, ligne=@ligne, listeligne=@listeligne;";
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@id", station.Id);
-                        cmd.Parameters.AddWithValue("@nom", station.Nom);
-                        cmd.Parameters.AddWithValue("@longitude", station.Lon);
-                        cmd.Parameters.AddWithValue("@latitude", station.Lat);
-                        cmd.Parameters.AddWithValue("@ligne", station.Ligne);
-                        cmd.Parameters.AddWithValue("@listeligne", lignesString);
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-
-                foreach (var station in stations)
-                {
-                    List<string> linkedStations = new List<string>();
-                    foreach (var lien in liens)
-                    {
-                        if (lien.Source.Id == station.Id)
-                        {
-                            linkedStations.Add(lien.Destination.Nom);
-                        }
-                    }
-                    string linksString = string.Join(",", linkedStations);
-
-                    string updateQuery = "UPDATE stations_metro SET liens = @liens WHERE id = @id";
-                    using (MySqlCommand cmd = new MySqlCommand(updateQuery, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@liens", linksString);
-                        cmd.Parameters.AddWithValue("@id", station.Id);
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        Console.WriteLine($"Mise à jour liens pour {station.Nom}: {rowsAffected} ligne(s) affectée(s)");
-                    }
-                }
-            }
-        }
-
-        public List<Noeud> Stations
-        {
-            get { return stations; }
-            set { stations = value; }
-        }
-
-        public int Rows
-        {
-            get { return rows; }
-            set { rows = value; }
         }
 
     }

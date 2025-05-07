@@ -14,7 +14,7 @@ namespace psi_joséphine
             {
                 con.Open();
 
-                // Vérifier si l'email existe déjà
+                /// Vérifier si l'email existe déjà
                 string checkEmailQuery = "SELECT COUNT(*) FROM utilisateurs WHERE email = @email";
                 MySqlCommand checkEmail = new MySqlCommand(checkEmailQuery, con);
                 checkEmail.Parameters.AddWithValue("@email", utilisateur.Email);
@@ -25,7 +25,7 @@ namespace psi_joséphine
                     throw new Exception("Cet email est déjà utilisé.");
                 }
 
-                // Créer l'utilisateur
+                /// Créer l'utilisateur
                 string insertQuery = "INSERT INTO utilisateurs (prenom, nom, adresse, station_metro, mot_de_passe, role, email) " +
                                    "VALUES (@prenom, @nom, @adresse, @stationMetro, @motDePasse, @role, @email)";
                 
